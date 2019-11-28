@@ -12,7 +12,7 @@ if [ "$1" == "start" ];
 then
 	systemctl status docker || systemctl start docker
 	docker run --rm --name jrvs-psql -e POSTGRES_PASSWORD=$2 -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
-	psql -h localhost -U postgres -W
+	psql -h localhost -U postgres -w
 elif [ "$1" == "stop" ];
 then
 	systemctl stop docker
