@@ -1,6 +1,10 @@
+DROP DATABASE IF EXISTS host_agent;
 CREATE DATABASE host_agent;
 
 \c host_agent;
+
+DROP TABLE IF EXISTS PUBLIC.host_info CASCADE;
+DROP TABLE IF EXISTS PUBLIC.host_usage CASCADE;
 
 CREATE TABLE PUBLIC.host_info 
   ( 
