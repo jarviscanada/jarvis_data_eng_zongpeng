@@ -4,19 +4,27 @@
 Cluster Monitor Agent is an internal tool that monitors the cluster resources and save the collected information into a database for furture use. This helps the infrastrue team to monitor the efficiency and hardware status of each server. In case that something went wrong, the infrasture team can inspect the usage information collected to indentify the problem.
 
 ## Directory shortcut
-├── [assets]([https://github.com/jarvisgroup/jarvis_data_eng_zongpeng/tree/feature/Linux_Usage_Data/linux_sql/assets])
+├── [assets](../linux_sql/assets)
 
-│   ├── [Architecture_Diagram.drawio]([https://github.com/jarvisgroup/jarvis_data_eng_zongpeng/blob/feature/Linux_Usage_Data/linux_sql/assets/Architecture_Diagram.drawio])
+│   ├── [Architecture_Diagram.drawio](../linux_sql/assets/Architecture_Diagram.drawio)
 
-│   └── [Architecture_Diagram.png](https://github.com/jarvisgroup/jarvis_data_eng_zongpeng/blob/feature/Linux_Usage_Data/linux_sql/assets/Architecture_Diagram.png "Architecture_Diagram.png")]
-├── [scripts](https://github.com/jarvisgroup/jarvis_data_eng_zongpeng/tree/feature/Linux_Usage_Data/linux_sql/scripts)
-│   ├── [host_info.sh](https://github.com/jarvisgroup/jarvis_data_eng_zongpeng/blob/feature/Linux_Usage_Data/linux_sql/scripts/host_info.sh)
-│   ├── [host_usage.sh](https://github.com/jarvisgroup/jarvis_data_eng_zongpeng/blob/feature/Linux_Usage_Data/linux_sql/scripts/host_usage.sh)
-│   └── [psql_docker.sh](https://github.com/jarvisgroup/jarvis_data_eng_zongpeng/blob/feature/Linux_Usage_Data/linux_sql/scripts/psql_docker.sh)
-├── [sql](https://github.com/jarvisgroup/jarvis_data_eng_zongpeng/tree/feature/Linux_Usage_Data/linux_sql/sql)
-│   ├── [ddl.sql](https://github.com/jarvisgroup/jarvis_data_eng_zongpeng/blob/feature/Linux_Usage_Data/linux_sql/sql/ddl.sql)
-│   └── [queries.sql](https://github.com/jarvisgroup/jarvis_data_eng_zongpeng/blob/feature/Linux_Usage_Data/linux_sql/sql/queries.sql)
-└── [README.md](https://github.com/jarvisgroup/jarvis_data_eng_zongpeng/blob/feature/Linux_Usage_Data/linux_sql/README.md)
+│   └── [Architecture_Diagram.png](../linux_sql/assets/Architecture_Diagram.png)
+
+├── [scripts](../linux_sql/scripts)
+
+│   ├── [host_info.sh](../linux_sql/scripts/host_info.sh)
+
+│   ├── [host_usage.sh](../linux_sql/scripts/host_usage.sh)
+
+│   └── [psql_docker.sh](../linux_sql/scripts/psql_docker.sh)
+
+├── [sql](../linux_sql/sql)
+
+│   ├── [ddl.sql](../linux_sql/sql/ddl.sql)
+
+│   └── [queries.sql](../linux_sql/sql/queries.sql)
+
+└── [README.md](../linux_sql/README.md)
 
 ## Architecture and Design 
 1) Below is a Architecture diagram for this project 
