@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# collecting infomation
 lscpu_out=$(lscpu)
 hostName=$(hostname -f)
 cpu_number=$(echo "$lscpu_out" | egrep "^CPU\(s\):" | awk '{print $2}')
@@ -10,6 +11,7 @@ L2_cache=$(echo "$lscpu_out" | egrep "^L2\scache:" | awk '{print $3}' | grep -o 
 total_mem=$(cat /proc/meminfo | egrep "^MemTotal:" | awk '{print $2}')
 timestamp=$(date '+%Y-%m-%d %H:%M:%S.%3N')
 
+# insert the information collected into the table created
 psql -h $1 -U $4 -w $3 -p $2 -c \
 	"INSERT INTO host_info
 	 (hostname, cpu_number, cpu_architecture, cpu_model, cpu_mhz, l2_cache,
