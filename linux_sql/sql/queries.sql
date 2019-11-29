@@ -38,9 +38,9 @@ time_interval, total_mem
 FROM temp;
 
 --print the desired columns
-SELECT host_id, host_name, total_mem, AVG(average_usage)
+SELECT host_id, host_name, time_interval, AVG(average_usage)
 FROM temp_5min 
-GROUP BY host_id, host_name, total_mem;
+GROUP BY host_id, host_name, time_interval;
 
 
 
