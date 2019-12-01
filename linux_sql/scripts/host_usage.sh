@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if (($#!=5));
+then
+	echo "WARNING: The number of arguments is not correct... Please enter exact 5 arguments.
+Format: host_info.sh host_name port_number database_name user_name password >&2
+	exit 1
+fi
+
 # collect information for CPU, memory, disk usage
 #another way: timestamp=$(vmstat -t | sed -n 3p | awk '{print $(NF-1)," ",$NF}')
 timestamp=$(date '+%Y-%m-%d %H:%M:%S.%3N')
