@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if (($#!=5));
+then
+	echo "WARNING: The number of arguments is not correct... Please enter exact 5 arguments.
+Format: host_info.sh host_name port_number database_name user_name password >&2
+	exit 1
+
 # collecting infomation
 lscpu_out=$(lscpu)
 hostName=$(hostname -f)
