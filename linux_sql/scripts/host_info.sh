@@ -1,10 +1,17 @@
 #!/bin/bash
 
+host_name=$1
+port_number=$2
+database_name=$3
+user_name=$4
+password=$5
+
 if (($#!=5));
 then
 	echo "WARNING: The number of arguments is not correct... Please enter exact 5 arguments.
 Format: host_info.sh host_name port_number database_name user_name password >&2
 	exit 1
+fi
 
 # collecting infomation
 lscpu_out=$(lscpu)
@@ -18,7 +25,7 @@ total_mem=$(cat /proc/meminfo | egrep "^MemTotal:" | awk '{print $2}')
 timestamp=$(date '+%Y-%m-%d %H:%M:%S.%3N')
 
 # insert the information collected into the table created
-psql -h $1 -U $4 -w $3 -p $2 -c \
+psql -h $host_name -U user_name -w database_name -p port_number -c \
 	"INSERT INTO host_info
 	 (hostname, cpu_number, cpu_architecture, cpu_model, cpu_mhz, l2_cache,
 	  timestamp, total_mem)
