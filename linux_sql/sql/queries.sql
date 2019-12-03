@@ -9,39 +9,23 @@ ORDER BY
 
 --Q2--
 --create temporary table to sort calculated values
-CREATE TEMP TABLE temp 
-AS
-select info.id as host_id, info.hostname as host_name, 
-(info.total_mem * 1.0 - usage.memory_free * 1024.0) / info.total_mem * 100 AS memory_usage, 
-info.total_mem, usage.timestamp AS timestamp
-FROM
-host_info AS info 
-RIGHT OUTER JOIN 
-host_usage AS usage 
-ON info.id=usage.host_id;
-
---setting the time interval for timestamp
-ALTER TABLE temp
-ADD COLUMN time_interval timestamp;
-
---round the time to nearest 5min
-UPDATE temp
-SET time_interval = date_trunc('hour', timestamp) + INTERVAL '5 min' * 
-ROUND( date_part('minute', timestamp) / 5.0);
-
---create another temporary table to store calculated average over 5 min
-CREATE TEMP TABLE temp_5min 
-AS
-SELECT host_id, host_name, 
-AVG(memory_usage) over (partition by time_interval) as average_usage,
-time_interval, total_mem
-FROM temp;
-
---print the desired columns
-SELECT host_id, host_name, time_interval, AVG(average_usage)
-FROM temp_5min 
-GROUP BY host_id, host_name, time_interval;
-
+select 
+	host_usage.host_id as host_id, 
+	host_info.host_name as host_name, 
+	host_info.total_mem as total_memory, 
+	avg(
+		((host_info.total_mem - host.usage.memory_free) / host_info.total_mem) * 100) 
+		as used_memory_percentage 
+from 	
+	host_usage 
+	inner join host_info on host_usage.host_id=host_info.id 
+group by
+	host_id, 
+	host_name, 
+	total_memory, 
+	DATE_TRUNC('hour', host_usage.timestamp) + DATE_PART('minute', host_usage.timestamp)::int / 5 * interval '5 min' as time 
+order by 
+	host_usage.host_id;
 
 
 
