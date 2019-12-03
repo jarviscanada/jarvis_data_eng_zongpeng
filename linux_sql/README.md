@@ -3,29 +3,6 @@
 ## Introduction
 Cluster Monitor Agent is an internal tool that monitors the cluster resources and save the collected information into a database for furture use. This helps the infrastrue team to monitor the efficiency and hardware status of each server. In case that something went wrong, the infrasture team can inspect the usage information collected to indentify the problem.
 
-## Directory shortcut
-├── [assets](../linux_sql/assets)
-
-│   ├── [Architecture_Diagram.drawio](../linux_sql/assets/Architecture_Diagram.drawio)
-
-│   └── [Architecture_Diagram.png](../linux_sql/assets/Architecture_Diagram.png)
-
-├── [scripts](../linux_sql/scripts)
-
-│   ├── [host_info.sh](../linux_sql/scripts/host_info.sh)
-
-│   ├── [host_usage.sh](../linux_sql/scripts/host_usage.sh)
-
-│   └── [psql_docker.sh](../linux_sql/scripts/psql_docker.sh)
-
-├── [sql](../linux_sql/sql)
-
-│   ├── [ddl.sql](../linux_sql/sql/ddl.sql)
-
-│   └── [queries.sql](../linux_sql/sql/queries.sql)
-
-└── [README.md](../linux_sql/README.md)
-
 ## Architecture and Design 
 1) Below is a Architecture diagram for this project 
 
