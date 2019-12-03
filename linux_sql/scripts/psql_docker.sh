@@ -1,6 +1,9 @@
 # script usage 
 # ./scripts/psql_docker.sh start|stop [password for database]
 
+option=$1
+password=$2
+
 # function below will create a container for postgreSQL
 dockerrun () {
 	docker run --name jrvs-psql -e POSTGRES_PASSWORD=$2 -d -v \
@@ -22,7 +25,7 @@ then
 fi
 
 # check if it is start or stop
-if [ "$1" == "start" ];
+if [ "$option" == "start" ];
 then
 	# start docker if not started yet
 	systemctl status docker || systemctl start docker
@@ -53,7 +56,7 @@ then
 		exit 0
 	fi
 # check if it is stop 
-elif [[ "$1" == "stop" && "$#" == 1 ]];
+elif [[ "$option" == "stop" && "$#" == 1 ]];
 then
 	#stop the container & the docker
 	systemctl status docker && docker stop jrvs-psql
