@@ -11,118 +11,122 @@ import java.util.Scanner;
 
 public class JavaGrepImp implements JavaGrep {
 
-    private String rootPath;
-    private String regex;
-    private String outFile;
+  private String rootPath;
+  private String regex;
+  private String outFile;
 
-    public static void main(String[] args) {
-        if (args.length != 3) {
-            throw new IllegalArgumentException("USAGE: regex rootPath outFile");
-        }
-        JavaGrepImp javaGrepImp = new JavaGrepImp();
-        javaGrepImp.setRegex(args[0]);
-        javaGrepImp.setRootPath(args[1]);
-        javaGrepImp.setOutFile(args[2]);
-
-        try {
-            javaGrepImp.process();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+  public static void main(String[] args) {
+    if (args.length != 3) {
+      throw new IllegalArgumentException("USAGE: regex rootPath outFile");
     }
+    JavaGrepImp javaGrepImp = new JavaGrepImp();
+    javaGrepImp.setRegex(args[0]);
+    javaGrepImp.setRootPath(args[1]);
+    javaGrepImp.setOutFile(args[2]);
 
-    @Override
-    public void process() throws IOException {
-        List<File> listFile = listFiles(rootPath);
-        List<String> listString = new ArrayList<>();
-        List<String> matchedString = new ArrayList<>();
-        for (File f : listFile) {
-            listString = readLines(f);
-            for (String s : listString) if (constainsPattern(s)) matchedString.add(s);
-        }
-        writeToFile(matchedString);
+    try {
+      javaGrepImp.process();
+    } catch (Exception ex) {
+      ex.printStackTrace();
     }
+  }
 
-    @Override
-    public List<File> listFiles(String rootDir) {
-        File root = new File(rootDir);
-        File[] list = root.listFiles();
-        List<File> fileList = new ArrayList<>();
-        if (list == null) {
-            return null;
-        }
-        for (File f : list) {
-
-            if (f.isDirectory()) {
-                List<File> tempF = listFiles(f.getAbsolutePath());
-                fileList.addAll(tempF);
-            } else {
-                fileList.add(f);
+  @Override
+  public void process() throws IOException {
+    List<File> listFile = listFiles(rootPath);
+    List<String> listString = new ArrayList<>();
+    List<String> matchedString = new ArrayList<>();
+    for (File f : listFile) {
+      listString = readLines(f);
+        for (String s : listString) {
+            if (constainsPattern(s)) {
+                matchedString.add(s);
             }
         }
+    }
+    writeToFile(matchedString);
+  }
 
-        return fileList;
+  @Override
+  public List<File> listFiles(String rootDir) {
+    File root = new File(rootDir);
+    File[] list = root.listFiles();
+    List<File> fileList = new ArrayList<>();
+    if (list == null) {
+      return null;
+    }
+    for (File f : list) {
+
+      if (f.isDirectory()) {
+        List<File> tempF = listFiles(f.getAbsolutePath());
+        fileList.addAll(tempF);
+      } else {
+        fileList.add(f);
+      }
     }
 
-    @Override
-    public List<String> readLines(File inputFile) {
-        List<String> listString = new ArrayList<>();
-        try {
-            Scanner scanner = new Scanner(inputFile);
-            while (scanner.hasNextLine()) {
-                listString.add(scanner.nextLine());
-            }
-            scanner.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return listString;
+    return fileList;
+  }
+
+  @Override
+  public List<String> readLines(File inputFile) {
+    List<String> listString = new ArrayList<>();
+    try {
+      Scanner scanner = new Scanner(inputFile);
+      while (scanner.hasNextLine()) {
+        listString.add(scanner.nextLine());
+      }
+      scanner.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return listString;
+  }
+
+  @Override
+  public boolean constainsPattern(String line) {
+    return line.matches(this.regex);
+  }
+
+  @Override
+  public void writeToFile(List<String> lines) throws IOException {
+    Path file = (new File(outFile)).toPath();
+    try {
+      Files.createFile(file);
+    } catch (IOException ignored) {
+      ;
     }
 
-    @Override
-    public boolean constainsPattern(String line) {
-        return line.matches(this.regex);
-    }
+    Files.write(file, lines);
+  }
 
-    @Override
-    public void writeToFile(List<String> lines) throws IOException {
-        Path file = (new File(outFile)).toPath();
-        try {
-            Files.createFile(file);
-        } catch (IOException ignored) {
-            ;
-        }
+  @Override
+  public String getRootPath() {
+    return rootPath;
+  }
 
-        Files.write(file, lines);
-    }
+  @Override
+  public void setRootPath(String rootPath) {
+    this.rootPath = rootPath;
+  }
 
-    @Override
-    public String getRootPath() {
-        return rootPath;
-    }
+  @Override
+  public String getRegex() {
+    return regex;
+  }
 
-    @Override
-    public void setRootPath(String rootPath) {
-        this.rootPath = rootPath;
-    }
+  @Override
+  public void setRegex(String regex) {
+    this.regex = regex;
+  }
 
-    @Override
-    public String getRegex() {
-        return regex;
-    }
+  @Override
+  public String getOutFile() {
+    return outFile;
+  }
 
-    @Override
-    public void setRegex(String regex) {
-        this.regex = regex;
-    }
-
-    @Override
-    public String getOutFile() {
-        return outFile;
-    }
-
-    @Override
-    public void setOutFile(String outFile) {
-        this.outFile = outFile;
-    }
+  @Override
+  public void setOutFile(String outFile) {
+    this.outFile = outFile;
+  }
 }
