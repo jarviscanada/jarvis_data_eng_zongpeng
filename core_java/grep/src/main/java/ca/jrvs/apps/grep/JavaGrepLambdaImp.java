@@ -3,16 +3,12 @@ package ca.jrvs.apps.grep;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Stream;
 
-public class JavaGrepLambdaImp extends JavaGrepImp{
-
+public class JavaGrepLambdaImp extends JavaGrepImp {
 
 
   public static void main(String[] args) {
@@ -47,7 +43,7 @@ public class JavaGrepLambdaImp extends JavaGrepImp{
   @Override
   public List<String> readLines(File inputFile) {
     List<String> listString = new ArrayList<>();
-    try (Stream<String> lines = Files.lines(Paths.get(inputFile.toURI()))){
+    try (Stream<String> lines = Files.lines(Paths.get(inputFile.toURI()))) {
       lines.forEach(listString::add);
     } catch (IOException e) {
       e.printStackTrace();
