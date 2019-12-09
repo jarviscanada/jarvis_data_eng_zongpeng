@@ -5,4 +5,5 @@ This app will implement the idea of Data Access Object by using Data Transfer Ob
 ![Diagram](../assets/ERDiagram.png)
 
 # Design Patterns Discuss 
-DAO and Repository design patterns 
+DAO and Repository design patterns Comparison:
+![Diagram](../assets/RepoVsDAO.png)
