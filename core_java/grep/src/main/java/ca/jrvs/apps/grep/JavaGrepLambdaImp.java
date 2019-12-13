@@ -29,8 +29,6 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
 
   @Override
   public List<File> listFiles(String rootDir) throws IOException {
-    File root = new File(rootDir);
-    File[] list = root.listFiles();
     List<File> fileList = new ArrayList<>();
     Files.walk(Paths.get(rootDir))
         .filter(Files::isRegularFile)
