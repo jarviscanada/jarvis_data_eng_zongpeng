@@ -6,7 +6,7 @@ Cluster Monitor Agent is an internal tool that monitors the cluster resources an
 ## Architecture and Design 
 1) Below is a Architecture diagram for this project 
 
-![Diagram](/assets/Architecture_Diagram.png)
+![Diagram](./assets/Architecture_Diagram.png)
 
 2) It will setup a database called host_agent that consists of 2 table: host_info and host_usage. "host_info" table includes all the hardware specification and its hostname along with a id assigned to each host. "host_info" table includes the usage of CPU, memory, and disk for a certain host (identified by host id) at a certain time.
 3) The script usage in this project will be explained below:
