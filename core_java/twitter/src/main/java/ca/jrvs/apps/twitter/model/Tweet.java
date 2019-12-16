@@ -4,7 +4,6 @@ package ca.jrvs.apps.twitter.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -26,7 +25,7 @@ public class Tweet {
   private String createdTime;
 
   @JsonProperty("id")
-  private long id;
+  private Long id;
 
   @JsonProperty("id_str")
   private String id_str;
@@ -63,11 +62,11 @@ public class Tweet {
     this.createdTime = createdTime;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
