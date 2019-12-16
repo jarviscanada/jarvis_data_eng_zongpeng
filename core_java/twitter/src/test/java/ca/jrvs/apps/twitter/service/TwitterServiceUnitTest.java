@@ -1,8 +1,6 @@
 package ca.jrvs.apps.twitter.service;
 
-
 import static org.mockito.Mockito.*;
-
 import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.model.TweetConstructor;
@@ -27,7 +25,7 @@ public class TwitterServiceUnitTest {
   public void postTweet(){
     Tweet tweet = new Tweet();
     when(dao.create(any())).thenReturn(tweet);
-    twitterService.postTweet(TweetConstructor.tweetBuild("some test", 30.0, 0.0));
+    tweet = twitterService.postTweet(TweetConstructor.tweetBuild("some test", 30.0, 0.0));
     tester(tweet);
   }
 
@@ -37,7 +35,7 @@ public class TwitterServiceUnitTest {
     String id = "0123456789012345678";
     String[] fields = {"created_at", "id_str"};
     when(dao.findById(any())).thenReturn(tweet);
-    twitterService.showTweet(id, fields);
+    tweet = twitterService.showTweet(id, fields);
     tester(tweet);
   }
 
@@ -63,6 +61,5 @@ public class TwitterServiceUnitTest {
     assertEquals(null, tweet.getRetweetCount());
     assertEquals(null, tweet.getFavorited());
     assertEquals(null, tweet.getRetweeted());
-
   }
 }
