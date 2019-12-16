@@ -6,12 +6,15 @@ import ca.jrvs.apps.twitter.model.TweetConstructor;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import ca.jrvs.apps.twitter.model.Tweet;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class TwitterDaoIntTest {
 
   private TwitterDao dao;
+  private Tweet postTweet;
+  private Tweet tweet;
 
   @Before
   public void setUp() {
@@ -23,32 +26,39 @@ public class TwitterDaoIntTest {
     HttpHelper httpHelper = new TwitterHttpHelper(consumerKey, consumerSecret,
         accessToken, tokenSecret);
     this.dao = new TwitterDao(httpHelper);
-  }
 
-  @Test
-  public void create() throws Exception{
+    // Setting up the postTweet which is going to post
     String hashtag = "abc";
     String text = "what is happening " + hashtag + " " + System.currentTimeMillis();
     Double lat = 34d;
     Double lon = -118d;
-    Tweet posttweet = TweetConstructor.tweetBuild(text, lon, lat);
+    postTweet = TweetConstructor.tweetBuild(text, lon, lat);
 
-    Tweet tweet = dao.create(posttweet);
-    tester(tweet,text,lon,lat);
-
-    Tweet tweetShow = dao.findById(tweet.getId_str());
-    tester(tweetShow, text, lon, lat);
-
-    Tweet tweetDelete = dao.deleteById(tweet.getId_str());
-    tester(tweetDelete, text, lon, lat);
+    // Posting tweet
+    tweet = dao.create(postTweet);
+    tester(tweet);
   }
 
-  public void tester(Tweet tweet, String text, Double lon, Double lat){
+  @Test
+  public void show() throws Exception{
+    Tweet tweetShow = dao.findById(tweet.getId_str());
+    tester(tweetShow);
+  }
 
-    assertEquals(text, tweet.getText());
+  @After
+  public void delete(){
+    Tweet tweetDelete = dao.deleteById(tweet.getId_str());
+    tester(tweetDelete);
+  }
+
+  public void tester(Tweet tweet){
+
+    assertEquals(postTweet.getText(), tweet.getText());
     assertNotNull(tweet.getCoordinates());
     assertEquals(2,tweet.getCoordinates().getCoordinatesTweet().size());
-    assertEquals(lon, tweet.getCoordinates().getCoordinatesTweet().get(0));
-    assertEquals(lat, tweet.getCoordinates().getCoordinatesTweet().get(1));
+    assertEquals(postTweet.getCoordinates().getCoordinatesTweet().get(0),
+        tweet.getCoordinates().getCoordinatesTweet().get(0));
+    assertEquals(postTweet.getCoordinates().getCoordinatesTweet().get(1),
+        tweet.getCoordinates().getCoordinatesTweet().get(1));
   }
 }
