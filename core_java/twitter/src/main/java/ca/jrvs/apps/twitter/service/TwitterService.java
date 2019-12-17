@@ -61,7 +61,7 @@ public class TwitterService implements Service {
   private void validateTweetId(String id) {
     if (id.length()!=19){
       throw new RuntimeException("The id is not in the correct format. "
-          + "It should consist of 20 digits.");
+          + "It should consist of 19 digits.");
     }
   }
 
