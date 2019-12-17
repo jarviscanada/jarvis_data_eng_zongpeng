@@ -49,8 +49,8 @@ public class TwitterControllerIntTest {
   @Test
   public void showTweet(){
     String[] input = {"show", tweet.getId_str(), "created_at,id_str"};
-    tweet = controller.showTweet(input);
-    tester(tweet);
+    Tweet tweetShow = controller.showTweet(input);
+    tester(tweetShow);
   }
 
   @After
