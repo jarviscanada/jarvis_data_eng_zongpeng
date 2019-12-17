@@ -1,2 +1,5 @@
 Ex_Files_Learning_JDBC/
-.idea
+.idea/
+*.iml
+target/
+
