@@ -18,15 +18,17 @@ The function of this app is to post a tweet with coordinates, show a tweet with 
 ### TwitterCLIApp
 * The function of TwitterCLIApp is to gather inputs from the command line and invoke methods defined in TwitterController if the input is not empty.
 
-# Quick Start - how to package your app using mvn - how to run your app and explain option 
+# Quick Start
 ## Maven
+* To build the package, proceed to twitter directory and run `mvn package` in the command window.
+* To run this app, under twitter directory, run `java -jar target/java_apps-1.0-SNAPSHOT.jar [action] [option(s)]` in the command window. The usage for different actions (post, show, and delete) will be presented in the following sections.
+
 ## App Usage
 #### Post a Tweet
 **Usage**: ` TwitterCLIApp post "Text" "Longitude:Latitude"`
 #### Show a Tweet
 **Usage**: `TwitterCLIApp show "id" "fields"
 -- Fields indicated which part to show in the result (This function is under development).
--- "id" must in string format.
 #### Delete a Tweet
 **Usage**: `TwitterCLIApp delete "id_array"
 -- The "id_array" is a string that stores a list of id separated by comma.
