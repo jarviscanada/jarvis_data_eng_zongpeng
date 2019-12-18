@@ -55,10 +55,10 @@ public class TwitterDao implements CrdDao<Tweet,String> {
   }
 
   @Override
-  public Tweet findById(String s) {
+  public Tweet findById(String id) {
     URI uri;
     try {
-      uri = getShowUri(s);
+      uri = getShowUri(id);
     } catch (URISyntaxException e){
       throw new IllegalArgumentException("Invalid tweet input ", e);
     }
@@ -67,15 +67,15 @@ public class TwitterDao implements CrdDao<Tweet,String> {
     return parseResponse(response);
   }
 
-  private URI getShowUri(String s) throws URISyntaxException {
-    return new URI(API_BASE_URI + SHOW_PATH + QUERY_SYM + "id" + EQUAL + s);
+  private URI getShowUri(String id) throws URISyntaxException {
+    return new URI(API_BASE_URI + SHOW_PATH + QUERY_SYM + "id" + EQUAL + id);
   }
 
   @Override
-  public Tweet deleteById(String s) {
+  public Tweet deleteById(String id) {
     URI uri;
     try {
-      uri = getDeleteUri(s);
+      uri = getDeleteUri(id);
     } catch (URISyntaxException e){
       throw new IllegalArgumentException("Invalid tweet input ", e);
     }
@@ -84,8 +84,8 @@ public class TwitterDao implements CrdDao<Tweet,String> {
     return parseResponse(response);
   }
 
-  private URI getDeleteUri(String s) throws URISyntaxException {
-    return new URI(API_BASE_URI + DELETE_PATH + "/" + s + ".json" );
+  private URI getDeleteUri(String id) throws URISyntaxException {
+    return new URI(API_BASE_URI + DELETE_PATH + "/" + id + ".json" );
   }
 
   public Tweet parseResponse(HttpResponse response){
