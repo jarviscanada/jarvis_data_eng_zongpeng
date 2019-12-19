@@ -10,11 +10,15 @@ import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.service.TwitterService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TwitterCLIApp {
 
   private Controller controller;
 
+  @Autowired
   public TwitterCLIApp(Controller controller){
     this.controller = controller;
   }
@@ -36,7 +40,7 @@ public class TwitterCLIApp {
     CLIApp.run(args);
   }
 
-  private void run(String[] args) {
+  public void run(String[] args) {
     if (args.length == 0){
       throw new IllegalArgumentException("Error: You didn't enter any input.");
     }
@@ -48,7 +52,7 @@ public class TwitterCLIApp {
         print(tweet);
         break;
       case "show":
-        tweet = controller.postTweet(args);
+        tweet = controller.showTweet(args);
         print(tweet);
         break;
       case "delete":

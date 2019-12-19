@@ -4,8 +4,10 @@ import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.model.TweetConstructor;
 import ca.jrvs.apps.twitter.service.Service;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+@org.springframework.stereotype.Controller
 public class TwitterController implements Controller{
 
   private static final String COORD_SEP = ":";
@@ -13,6 +15,7 @@ public class TwitterController implements Controller{
 
   private Service service;
 
+  @Autowired
   public TwitterController(Service service){
     this.service = service;
   }
@@ -80,6 +83,6 @@ public class TwitterController implements Controller{
     for (String id : idArray){
       idChecker(id);
     }
-    return service.deleteTweets(args);
+    return service.deleteTweets(idArray);
   }
 }

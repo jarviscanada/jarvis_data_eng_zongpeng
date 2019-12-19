@@ -5,15 +5,17 @@ import ca.jrvs.apps.twitter.model.Tweet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+@org.springframework.stereotype.Service
 public class TwitterService implements Service {
 
   private CrdDao dao;
   private final String[] availableFields = {"created_at", "id", "id_str", "text", "source",
       "coordinates", "entities", "retweet_count", "favoriated_count", "favoriated", "retweeted"};
 
+  @Autowired
   public TwitterService(CrdDao dao){
     this.dao = dao;
   }
