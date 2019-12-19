@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.IOException;
 
-public class JavaParser {
+public class JsonParser {
   public static String toJson(Object object, boolean prettyJson, boolean includeNullValues)
       throws JsonProcessingException {
     ObjectMapper m = new ObjectMapper();

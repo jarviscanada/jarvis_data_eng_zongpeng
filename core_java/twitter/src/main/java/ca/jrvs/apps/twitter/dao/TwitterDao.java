@@ -114,7 +114,7 @@ public class TwitterDao implements CrdDao<Tweet,String> {
     }
 
     try{
-      tweet = JavaParser.toObjectFromJson(jsonString, Tweet.class);
+      tweet = JsonParser.toObjectFromJson(jsonString, Tweet.class);
     }catch (IOException e){
       throw new RuntimeException("Unable to convert from Json String to Object", e);
     }

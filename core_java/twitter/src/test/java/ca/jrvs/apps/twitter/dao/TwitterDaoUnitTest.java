@@ -52,7 +52,7 @@ public class TwitterDaoUnitTest {
 
     when(mockHelper.httpPost(isNotNull())).thenReturn(null);
     TwitterDao spyDao = Mockito.spy(dao);
-    Tweet expectedTweet = JavaParser.toObjectFromJson(tweetJsonStr, Tweet.class);
+    Tweet expectedTweet = JsonParser.toObjectFromJson(tweetJsonStr, Tweet.class);
 
     doReturn(expectedTweet).when(spyDao).parseResponse(any());
     Tweet tweet = spyDao.create(TweetConstructor.tweetBuild(text, lon, lat));
@@ -91,7 +91,7 @@ public class TwitterDaoUnitTest {
 
     when(mockHelper.httpGet(isNotNull())).thenReturn(null);
     TwitterDao spyDao = Mockito.spy(dao);
-    Tweet expectedTweet = JavaParser.toObjectFromJson(tweetJsonStr, Tweet.class);
+    Tweet expectedTweet = JsonParser.toObjectFromJson(tweetJsonStr, Tweet.class);
 
     doReturn(expectedTweet).when(spyDao).parseResponse(any());
     Tweet tweet = spyDao.findById("1205582607922139137");
@@ -130,7 +130,7 @@ public class TwitterDaoUnitTest {
 
     when(mockHelper.httpPost(isNotNull())).thenReturn(null);
     TwitterDao spyDao = Mockito.spy(dao);
-    Tweet expectedTweet = JavaParser.toObjectFromJson(tweetJsonStr, Tweet.class);
+    Tweet expectedTweet = JsonParser.toObjectFromJson(tweetJsonStr, Tweet.class);
 
     doReturn(expectedTweet).when(spyDao).parseResponse(any());
     Tweet tweet = spyDao.deleteById("1205582607922139137");
