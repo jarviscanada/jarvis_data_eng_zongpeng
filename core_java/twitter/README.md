@@ -31,7 +31,7 @@ The function of this app is to post a tweet with coordinates, show a tweet with 
 #### Delete a Tweet
 **Usage**: `TwitterCLIApp delete "id_array"
 -- The "id_array" is a string that stores a list of id separated by comma.
-# Model Talk about tweet model 
+# Model 
 In this app, a Tweet class is set up as a model to store the http response from Twitter server. The response is in Json format and the interested properties are parsed to Tweet object using JsonParser in dao package. An example of  Json with interested properties is shown below.
 ```Json
 //Simplified Tweet Object 
