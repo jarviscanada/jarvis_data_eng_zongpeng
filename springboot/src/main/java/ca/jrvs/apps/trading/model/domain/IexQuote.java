@@ -1,5 +1,6 @@
 package ca.jrvs.apps.trading.model.domain;
 
+import io.swagger.models.auth.In;
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -75,7 +76,7 @@ public class IexQuote {
   @JsonProperty("low")
   private Object low;
   @JsonProperty("latestPrice")
-  private Object latestPrice;
+  private Double latestPrice;
   @JsonProperty("latestSource")
   private Object latestSource;
   @JsonProperty("latestTime")
@@ -119,13 +120,13 @@ public class IexQuote {
   @JsonProperty("avgTotalVolume")
   private Object avgTotalVolume;
   @JsonProperty("iexBidPrice")
-  private Object iexBidPrice;
+  private Double iexBidPrice;
   @JsonProperty("iexBidSize")
-  private Object iexBidSize;
+  private Integer iexBidSize;
   @JsonProperty("iexAskPrice")
-  private Object iexAskPrice;
+  private Double iexAskPrice;
   @JsonProperty("iexAskSize")
-  private Object iexAskSize;
+  private Integer iexAskSize;
   @JsonProperty("marketCap")
   private Object marketCap;
   @JsonProperty("week52High")
@@ -234,12 +235,12 @@ public class IexQuote {
   }
 
   @JsonProperty("latestPrice")
-  public Object getLatestPrice() {
+  public Double getLatestPrice() {
     return latestPrice;
   }
 
   @JsonProperty("latestPrice")
-  public void setLatestPrice(Object latestPrice) {
+  public void setLatestPrice(Double latestPrice) {
     this.latestPrice = latestPrice;
   }
 
@@ -454,42 +455,42 @@ public class IexQuote {
   }
 
   @JsonProperty("iexBidPrice")
-  public Object getIexBidPrice() {
+  public Double getIexBidPrice() {
     return iexBidPrice;
   }
 
   @JsonProperty("iexBidPrice")
-  public void setIexBidPrice(Object iexBidPrice) {
+  public void setIexBidPrice(Double iexBidPrice) {
     this.iexBidPrice = iexBidPrice;
   }
 
   @JsonProperty("iexBidSize")
-  public Object getIexBidSize() {
+  public Integer getIexBidSize() {
     return iexBidSize;
   }
 
   @JsonProperty("iexBidSize")
-  public void setIexBidSize(Object iexBidSize) {
+  public void setIexBidSize(Integer iexBidSize) {
     this.iexBidSize = iexBidSize;
   }
 
   @JsonProperty("iexAskPrice")
-  public Object getIexAskPrice() {
+  public Double getIexAskPrice() {
     return iexAskPrice;
   }
 
   @JsonProperty("iexAskPrice")
-  public void setIexAskPrice(Object iexAskPrice) {
+  public void setIexAskPrice(Double iexAskPrice) {
     this.iexAskPrice = iexAskPrice;
   }
 
   @JsonProperty("iexAskSize")
-  public Object getIexAskSize() {
+  public Integer getIexAskSize() {
     return iexAskSize;
   }
 
   @JsonProperty("iexAskSize")
-  public void setIexAskSize(Object iexAskSize) {
+  public void setIexAskSize(Integer iexAskSize) {
     this.iexAskSize = iexAskSize;
   }
 
