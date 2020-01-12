@@ -57,7 +57,7 @@ public class QuoteController {
       throw ResponseExceptionUtil.getResponseStatusException(e);
     }
   }
-  
+
   @GetMapping(path = "/dailyList")
   @ResponseStatus(HttpStatus.OK)
   @ResponseBody
