@@ -23,7 +23,7 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
     try {
       javaGrepLambdaImp.process();
     } catch (Exception ex) {
-      ex.printStackTrace();
+      throw new RuntimeException("Failed to execute the program.");
     }
   }
 
@@ -44,7 +44,7 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
     try (Stream<String> lines = Files.lines(Paths.get(inputFile.toURI()))) {
       lines.forEach(listString::add);
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new Runtime Exception("File cannot be opened");
     }
     return listString;
   }
