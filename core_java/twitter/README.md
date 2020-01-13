@@ -1,5 +1,5 @@
 # Introduction 
-The function of this app is to post a tweet with coordinates, show a tweet with a certain id, and delete tweets. By implementing this app, I am getting more familiar with Maven project structure, DTO, and DAO. The algorithm of OAuth 1.0 and the format of tweet objects are learned. Through the arrangement of the project layers, I have a deep understanding in MVC design pattern. During the implementation of CLI, I study the basic of Spring framework and am able to implement it.
+The function of this app is to post a tweet with coordinates, show a tweet with a certain id, and delete tweets. By implementing this app, I am getting more familiar with Maven project structure, DTO, and DAO. The concept of OAuth 1.0 protocol and the format of tweet objects are learned. Through the arrangement of the project layers, I have a deep understanding in MVC design pattern. During the implementation of CLI, I study the basic of Spring framework and am able to implement it.
 
 # Design Pattern
 ## UML Diagram
