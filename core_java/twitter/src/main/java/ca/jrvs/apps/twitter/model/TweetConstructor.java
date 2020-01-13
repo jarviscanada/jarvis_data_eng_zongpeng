@@ -19,7 +19,7 @@ public class TweetConstructor {
     return tweet;
   }
 
-  // The following method is in develop for the function of showTweet
+  // The following method is in develop for the function of showTweet (not mandatory)
   public static Tweet tweetModifier(Tweet tweetOrg, String[] fields){
     String[] availableFields = {"created_at", "id", "id_str", "text", "source",
         "coordinates", "entities", "retweet_count", "favoriated_count", "favoriated", "retweeted"};
