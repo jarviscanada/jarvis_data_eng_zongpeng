@@ -43,9 +43,6 @@ public class TwitterHttpHelper implements HttpHelper {
 
   @Override
   public HttpResponse httpPost(URI uri) {
-//    HttpPost httpP = new HttpPost(uri);
-//    consumer.sign(httpP);
-//    return httpClient.execute(httpP);
     try {
       return executeHttpRequest(HttpMethod.POST, uri, null);
     }catch (OAuthException | IOException e){
@@ -55,9 +52,6 @@ public class TwitterHttpHelper implements HttpHelper {
 
   @Override
   public HttpResponse httpGet(URI uri) {
-//    HttpGet request = new HttpGet(uri);
-//    consumer.sign(request);
-//    return httpClient.execute(request);
     try {
       return executeHttpRequest(HttpMethod.GET, uri, null);
     }catch (OAuthException | IOException e){
