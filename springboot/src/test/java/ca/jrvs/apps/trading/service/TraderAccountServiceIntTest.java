@@ -1,18 +1,13 @@
 package ca.jrvs.apps.trading.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import ca.jrvs.apps.trading.TestConfig;
-import ca.jrvs.apps.trading.dao.AccountDao;
 import ca.jrvs.apps.trading.dao.QuoteDao;
-import ca.jrvs.apps.trading.dao.TraderDao;
-import ca.jrvs.apps.trading.model.domain.Account;
-import ca.jrvs.apps.trading.model.domain.Position;
 import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
 import ca.jrvs.apps.trading.model.domain.Trader;
-import ca.jrvs.apps.trading.model.domain.TraderAccountView;
-import java.nio.channels.AcceptPendingException;
+import ca.jrvs.apps.trading.model.view.TraderAccountView;
 import java.util.Date;
 import org.junit.After;
 import org.junit.Assert;
@@ -36,32 +31,32 @@ public class TraderAccountServiceIntTest {
   private QuoteDao quoteDao;
 
   @Before
-  public void setup(){
+  public void setup() {
     Trader savedTrader = new Trader();
     savedTrader.setCountry("Canada");
-    savedTrader.setDob(new Date(1989,12,31));
+    savedTrader.setDob(new Date(1989, 12, 31));
     savedTrader.setEmail("Jarvis_2020@gmail.com");
     savedTrader.setFirstName("Zongpeng");
     savedTrader.setLastName("Yang");
     traderAccountView = traderAccountService.createTraderAndAccount(savedTrader);
-    traderAccountService.deposit(traderAccountView.getTraderId(), 1000d);
+    traderAccountService.deposit(traderAccountView.getTrader().getId(), 1000d);
   }
 
   @Test
-  public void withdraw(){
-    traderAccountService.withdraw(traderAccountView.getTraderId(), 500d);
-    try{
-      traderAccountService.deleteTraderById(traderAccountView.getTraderId());
-    } catch (IllegalArgumentException e){
+  public void withdraw() {
+    traderAccountService.withdraw(traderAccountView.getTrader().getId(), 500d);
+    try {
+      traderAccountService.deleteTraderById(traderAccountView.getTrader().getId());
+    } catch (IllegalArgumentException e) {
       assertTrue(true);
-    } catch (Exception e){
+    } catch (Exception e) {
       Assert.fail();
     }
-    traderAccountService.withdraw(traderAccountView.getTraderId(), 500d);
+    traderAccountService.withdraw(traderAccountView.getTrader().getId(), 500d);
   }
 
   @Test
-  public void quote(){
+  public void quote() {
     Quote savedQuote = new Quote();
     savedQuote.setAskPrice(10d);
     savedQuote.setAskSize(10);
@@ -71,7 +66,7 @@ public class TraderAccountServiceIntTest {
     savedQuote.setLastPrice(10.1d);
     quoteDao.save(savedQuote);
     SecurityOrder securityOrder = new SecurityOrder();
-    securityOrder.setAccountId(traderAccountView.getAccountId());
+    securityOrder.setAccountId(traderAccountView.getAccount().getId());
     securityOrder.setPrice(100d);
     securityOrder.setSize(10);
     securityOrder.setStatus("FILLED");
@@ -79,20 +74,20 @@ public class TraderAccountServiceIntTest {
     securityOrder.setNotes("N/a");
     securityOrder.setId(traderAccountService.getSecurityOrderDao().save(securityOrder).getId());
     try {
-      traderAccountService.deleteTraderById(traderAccountView.getTraderId());
-    } catch (IllegalArgumentException e){
+      traderAccountService.deleteTraderById(traderAccountView.getTrader().getId());
+    } catch (IllegalArgumentException e) {
       assertTrue(true);
-    } catch (Exception e){
+    } catch (Exception e) {
       Assert.fail();
     }
     securityOrder.setSize(-10);
     securityOrder.setId(null);
     traderAccountService.getSecurityOrderDao().save(securityOrder);
-    traderAccountService.withdraw(traderAccountView.getTraderId(), 1000d);
+    traderAccountService.withdraw(traderAccountView.getTrader().getId(), 1000d);
   }
 
   @After
-  public void delete(){
-    traderAccountService.deleteTraderById(traderAccountView.getTraderId());
+  public void delete() {
+    traderAccountService.deleteTraderById(traderAccountView.getTrader().getId());
   }
 }

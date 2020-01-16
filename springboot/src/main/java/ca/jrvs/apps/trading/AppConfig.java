@@ -1,14 +1,8 @@
 package ca.jrvs.apps.trading;
 
-import ca.jrvs.apps.trading.controller.QuoteController;
-import ca.jrvs.apps.trading.dao.MarketDataDao;
-import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
-import ca.jrvs.apps.trading.service.QuoteService;
-import com.sun.org.apache.xpath.internal.operations.Quo;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,22 +13,6 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
   private Logger logger = LoggerFactory.getLogger(AppConfig.class);
-
-  @Bean
-  public QuoteController quoteController(QuoteService quoteService){
-    return new QuoteController(quoteService);
-  }
-
-  @Bean
-  public QuoteService quoteService(QuoteDao quoteDao, MarketDataDao marketDataDao){
-    return new QuoteService(quoteDao, marketDataDao);
-  }
-
-  @Bean
-  public MarketDataDao marketDataDao(HttpClientConnectionManager httpClientConnectionManager,
-      MarketDataConfig marketDataConfig){
-    return new MarketDataDao(httpClientConnectionManager,marketDataConfig);
-  }
 
   @Bean
   public MarketDataConfig marketDataConfig(){
@@ -57,7 +35,6 @@ public class AppConfig {
     String url = System.getenv("PSQL_URL");
     String user = System.getenv("PSQL_USER");
     String password = System.getenv("PSQL_PASSWORD");
-    //Never log your credentials/secrets. Use debugger instead
     BasicDataSource basicDataSource = new BasicDataSource();
     basicDataSource.setUrl(url);
     basicDataSource.setUsername(user);

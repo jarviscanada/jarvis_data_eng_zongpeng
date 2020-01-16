@@ -8,7 +8,7 @@ import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.Position;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
 import ca.jrvs.apps.trading.model.domain.Trader;
-import ca.jrvs.apps.trading.model.domain.TraderAccountView;
+import ca.jrvs.apps.trading.model.view.TraderAccountView;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,10 +45,8 @@ public class TraderAccountService {
     account.setAmount(0d);
     account.setId(accountDao.save(account).getId());
     TraderAccountView traderAccountView = new TraderAccountView();
-    traderAccountView.setAccountId(account.getId());
-    traderAccountView.setBalance(0d);
-    traderAccountView.setId(trader.getId());
-    traderAccountView.setPosition(0);
+    traderAccountView.setTrader(trader);
+    traderAccountView.setAccount(account);
     return traderAccountView;
   }
 

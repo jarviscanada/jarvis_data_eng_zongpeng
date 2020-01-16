@@ -4,10 +4,12 @@ import static org.junit.Assert.*;
 
 import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.model.domain.Account;
+import ca.jrvs.apps.trading.model.domain.IexQuote;
 import ca.jrvs.apps.trading.model.domain.Position;
 import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
 import ca.jrvs.apps.trading.model.domain.Trader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -95,10 +97,51 @@ public class PositionDaoIntTest {
     assertEquals(securityOrder.getSize(), positions.get(0).getPosition());
   }
 
+  @Test
+  public void errorHandling(){
+    try{
+      positionDao.save(new Position());
+    } catch (UnsupportedOperationException e){
+      assertTrue(true);
+    }
+    try{
+      positionDao.saveAll(new ArrayList<Position>());
+    } catch (UnsupportedOperationException e){
+      assertTrue(true);
+    }
+    try{
+      positionDao.deleteById(1);
+    } catch (UnsupportedOperationException e){
+      assertTrue(true);
+    }
+    try{
+      positionDao.deleteAll();
+    } catch (UnsupportedOperationException e){
+      assertTrue(true);
+    }
+    try{
+      positionDao.delete(new Position());
+    } catch (UnsupportedOperationException e){
+      assertTrue(true);
+    }
+    try{
+      positionDao.deleteAll(new ArrayList<Position>());
+    } catch (UnsupportedOperationException e){
+      assertTrue(true);
+    }
+    try{
+      positionDao.updateOne(new Position());
+    } catch (UnsupportedOperationException e){
+      assertTrue(true);
+    }
+  }
+
   @After
   public void delete(){
     securityOrderDao.deleteById(securityOrder.getId());
     accountDao.deleteById(account.getId());
     traderDao.deleteById(savedTrader.getId());
   }
+
+
 }
