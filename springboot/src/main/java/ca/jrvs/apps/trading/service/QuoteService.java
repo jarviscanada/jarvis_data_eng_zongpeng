@@ -52,8 +52,8 @@ public class QuoteService {
    */
   public void updateMarketData(){
     List<Quote> quotes = findAllQuotes();
-    IexQuote iexQuote = new IexQuote();
-    Quote quoteTemp = new Quote();
+    IexQuote iexQuote;
+    Quote quoteTemp;
     for (Quote quote : quotes){
       String ticker = quote.getTicker();
       iexQuote = marketDataDao.findById(ticker).get();

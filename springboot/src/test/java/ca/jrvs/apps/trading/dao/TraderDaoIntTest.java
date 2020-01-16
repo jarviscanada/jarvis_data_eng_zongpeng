@@ -3,6 +3,7 @@ package ca.jrvs.apps.trading.dao;
 import static org.junit.Assert.*;
 
 import ca.jrvs.apps.trading.TestConfig;
+import ca.jrvs.apps.trading.model.domain.Position;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +53,20 @@ public class TraderDaoIntTest {
     assertEquals(savedTrader.getFirstName(), traders.get(0).getFirstName());
     assertEquals(savedTrader.getLastName(), traders.get(0).getLastName());
     assertEquals(savedTrader.getDob(), traders.get(0).getDob());
+  }
+
+  @Test
+  public void errorHandling(){
+    try{
+      traderDao.delete(new Trader());
+    } catch (UnsupportedOperationException e){
+      assertTrue(true);
+    }
+    try{
+      traderDao.deleteAll();
+    } catch (UnsupportedOperationException e){
+      assertTrue(true);
+    }
   }
 
   @After
