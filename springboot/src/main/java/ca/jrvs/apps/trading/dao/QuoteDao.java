@@ -140,7 +140,6 @@ public class QuoteDao implements CrudRepository<Quote, String> {
 
   @Override
   public void deleteById(String ticker) {
-    Object args = new Object[] {ticker};
     String deleteSql = "DELETE FROM " + TABLE_NAME + " WHERE ticker=?";
     getJdbcTemplate().update(deleteSql, ticker);
   }

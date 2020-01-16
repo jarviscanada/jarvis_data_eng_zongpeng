@@ -1,9 +1,6 @@
 package ca.jrvs.apps.trading;
 
-import ca.jrvs.apps.trading.dao.MarketDataDao;
-import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
-import ca.jrvs.apps.trading.service.QuoteService;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.http.conn.HttpClientConnectionManager;
