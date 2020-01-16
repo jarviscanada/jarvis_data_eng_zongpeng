@@ -31,7 +31,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MarketDataDao implements CrudRepository<IexQuote, String>{
 
-  private static final String IEX_BATCH_PATH = "stock/market/batch?symbols=%s&types=quote&token=";
+  private static final String IEX_BATCH_PATH = "/stock/market/batch?symbols=%s&types=quote&token=";
   private static final int HTTP_OK = 200;
   private final String IEX_BATCH_URL;
 
@@ -47,12 +47,12 @@ public class MarketDataDao implements CrudRepository<IexQuote, String>{
 
   @Override
   public <S extends IexQuote> S save(S s) {
-    return null;
+    throw new UnsupportedOperationException("Not Implemented.");
   }
 
   @Override
   public <S extends IexQuote> Iterable<S> saveAll(Iterable<S> iterable) {
-    return null;
+    throw new UnsupportedOperationException("Not Implemented.");
   }
 
   /**
@@ -79,12 +79,12 @@ public class MarketDataDao implements CrudRepository<IexQuote, String>{
 
   @Override
   public boolean existsById(String s) {
-    return false;
+    throw new UnsupportedOperationException("Not Implemented.");
   }
 
   @Override
   public Iterable<IexQuote> findAll() {
-    return null;
+    throw new UnsupportedOperationException("Not Implemented.");
   }
 
   @Override
@@ -122,27 +122,27 @@ public class MarketDataDao implements CrudRepository<IexQuote, String>{
 
   @Override
   public long count() {
-    return 0;
+    throw new UnsupportedOperationException("Not Implemented.");
   }
 
   @Override
   public void deleteById(String s) {
-
+    throw new UnsupportedOperationException("Not Implemented.");
   }
 
   @Override
   public void delete(IexQuote iexQuote) {
-
+    throw new UnsupportedOperationException("Not Implemented.");
   }
 
   @Override
   public void deleteAll(Iterable<? extends IexQuote> iterable) {
-
+    throw new UnsupportedOperationException("Not Implemented.");
   }
 
   @Override
   public void deleteAll() {
-
+    throw new UnsupportedOperationException("Not Implemented.");
   }
 
   /**

@@ -1,11 +1,16 @@
 package ca.jrvs.apps.trading.dao;
 
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
+import ca.jrvs.apps.trading.model.domain.Quote;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.apache.http.impl.conn.PoolingClientConnectionManager;
+import java.util.Optional;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,6 +18,8 @@ import org.junit.Test;
 import org.springframework.dao.DataRetrievalFailureException;
 
 public class MarketDataDaoIntTest {
+
+    private MarketDataDao dao;
 
     @Before
     public void init() {
@@ -48,5 +55,63 @@ public class MarketDataDaoIntTest {
         Assert.assertEquals(ticker, iexQuote.getSymbol());
     }
 
-    private MarketDataDao dao;
+    @Test
+    public void badHttpResponse(){
+        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+        cm.setMaxTotal(50);
+        cm.setDefaultMaxPerRoute(50);
+        MarketDataConfig marketDataConfig = new MarketDataConfig();
+        marketDataConfig.setHost("https://cloud.iexapis.com/v1/");
+        marketDataConfig.setToken(System.getenv("IEX_PUB_TOKENNN"));
+        MarketDataDao marketDataDao = new MarketDataDao(cm, marketDataConfig);
+        try {
+            marketDataDao.findAllById(Arrays.asList("AAPL", "FB"));
+        } catch (DataRetrievalFailureException e){
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void errorHandling(){
+        try{
+            dao.save(new IexQuote());
+        } catch (UnsupportedOperationException e){
+            assertTrue(true);
+        }
+        try{
+            dao.saveAll(new ArrayList<IexQuote>());
+        } catch (UnsupportedOperationException e){
+            assertTrue(true);
+        }
+        try{
+            dao.existsById("AAPL");
+        } catch (UnsupportedOperationException e){
+            assertTrue(true);
+        }
+        try{
+            dao.findAll();
+        } catch (UnsupportedOperationException e){
+            assertTrue(true);
+        }
+        try{
+            dao.count();
+        } catch (UnsupportedOperationException e){
+            assertTrue(true);
+        }
+        try{
+            dao.deleteById("AAPL");
+        } catch (UnsupportedOperationException e){
+            assertTrue(true);
+        }
+        try{
+            dao.deleteAll();
+        } catch (UnsupportedOperationException e){
+            assertTrue(true);
+        }
+        try{
+            dao.findAllById(new ArrayList<String>());
+        } catch (IllegalArgumentException e){
+            assertTrue(true);
+        }
+    }
 }
