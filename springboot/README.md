@@ -123,6 +123,7 @@ This endpoint will return all the securities owned by the given trader. For each
 
 # Docker Deployment
 ![Diagram](./assets/Docker.png)
+
 As mentioned in the [QuickStart](#docker-setup-before-deployment), the database needs to be launched in a docker container to use this application. The above diagram illustrates what is going on by doing that. Initially, it will create a docker network for future use(it is shown at the bottom of the diagram). For the second step, it will build a PostgreSQL using the Dockerfile under `./springboot/psql/` directory. It will execute the `schema.ddl` to set up the database. It will also build an image using Dockerfile under `./springboot/` directory. It will package the java application using maven and build an image from it. The last step would be the creation of the container from the images and attached them to the `trading-net` created before.
 
 # Improvements
