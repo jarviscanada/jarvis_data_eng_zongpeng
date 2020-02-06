@@ -69,7 +69,7 @@ Swagger is a set of open-source tools based on the OpenAPI Specification. It wil
 2. Postman
 Postman can also be used to interact with this application through HTTP requests. To do that, simply go to the link in the Swagger UI called `http://localhost:8080/v2/api-docs`, save the page to local machine and import this file using Postman. Or it can also be done by typing the URL manually. 
 # Architecture
-![Diagram](../assets/Design.png)
+![Diagram](./assets/Design.png)
 As shown in the above diagram, this application is divided into three tiers: client tire, application tire, and database tire. By doing this, the crush of one tire does not affect another tire. For example, if the application is crushed due to some bugs, the data will still be preserved in the database.
 * __Client Tire__
 	This tire is for the consumer of this application. It could either be a trader who is capable of using the REST API or some endpoints. It can be a Swagger UI, Postman or even using `curl` command from the Linux system. The HTTP request from this tire will be received and handled by the Tomcat Servlet. After the information is processed, the servelet will send HTTP responses back to the client. And it will be the client's responsibility to format the HTTP responses.
