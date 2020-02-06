@@ -44,8 +44,6 @@ public interface JavaGrep {
      */
     void writeToFile (List<String> lines) throws IOException;
 
-    //Getters and Setters
-
     String getRootPath();
 
     void setRootPath (String rootPath);

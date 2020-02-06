@@ -66,8 +66,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
     try{
       this.connection.setAutoCommit(false);
     }catch(SQLException e){
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      throw new RuntimeException("Unable to disable the auto commit.", e);
     }
     try(PreparedStatement statement = this.connection.prepareStatement(UPDATE);){
       statement.setString(1, dto.getFirstName());
@@ -86,11 +85,9 @@ public class CustomerDAO extends DataAccessObject<Customer> {
       try{
         this.connection.rollback();
       }catch (SQLException sqle){
-        e.printStackTrace();
-        throw new RuntimeException(sqle);
+      throw new RuntimeException("Unable to rollback.", e);
       }
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      throw new RuntimeException("Unable to execute the SQL query.", e);
     }
     return customer;
   }
@@ -111,8 +108,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
       int id = this.getLastVal(CUSTOMER_SEQUENCE);
       return this.findById(id);
     }catch (SQLException e){
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      throw new RuntimeException("Unable to execute the SQL query.", e);
     }
   }
 
@@ -122,8 +118,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
       statement.setLong(1, id);
       statement.execute();
     }catch(SQLException e){
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      throw new RuntimeException("Unable to execute the SQL query.", e);
     }
   }
 
@@ -146,8 +141,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
         customers.add(customer);
       }
     }catch (SQLException e){
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      throw new RuntimeException("Unable to execute the SQL query.", e);
     }
     return customers;
   }
@@ -176,8 +170,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
         customers.add(customer);
       }
     }catch (SQLException e){
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      throw new RuntimeException("Unable to execute the SQL query.", e);
     }
     return customers;
   }

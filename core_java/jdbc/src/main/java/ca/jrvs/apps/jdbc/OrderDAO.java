@@ -57,8 +57,7 @@ public class OrderDAO extends DataAccessObject<Order> {
       }
       order.setOrderItems(orderItems);
     }catch (SQLException e){
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      throw new RuntimeException("Unable to execute the SQL query.", e);
     }
     return order;
   }
@@ -120,8 +119,7 @@ public class OrderDAO extends DataAccessObject<Order> {
         order.getOrderItems().add(orderItem);
       }
     }catch(SQLException e){
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      throw new RuntimeException("Unable to execute the SQL query.", e);
     }
     return orders;
   }

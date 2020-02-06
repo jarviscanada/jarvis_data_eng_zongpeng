@@ -33,8 +33,7 @@ public abstract class DataAccessObject <T extends DataTransferObject>{
       }
       return key;
     }catch (SQLException e){
-      e.printStackTrace();;
-      throw new RuntimeException(e);
+      throw new RuntimeException("Unable to execute the SQL query.", e);
     }
   }
 }
