@@ -1,6 +1,3 @@
-
-
-
 # Trading REST API
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
@@ -53,7 +50,7 @@ docker run --name trading-psql-dev \
 -e POSTGRES_DB=jrvstrading \
 -e POSTGRES_USER=postgres \
 --network trading-net \
--d -p 5432:5432 trading-psql
+-d -p 8080:8080 trading-psql
 
 # container for the application and attach it to the created network
 docker run --name trading-app-dev \
@@ -94,30 +91,44 @@ As shown in the above diagram, this application is divided into three tiers: cli
 In the following description of the endpoints, the screenshot of Swagger UI is used. Please refer to the [previous](#test-with-swagger-ui-or-postman) section for usage of Swagger UI. The same result can also be achieved using Postman or `curl` command in Linux. However, Swagger UI is used as an example in this case because it looks good. Each endpoint will be described in detail in the following sections with the order presented in screentshot of each controller.
 ## Quote Controller
 ![Diagram](./assets/QuoteController.png)
-`/quote/dialyList`
+__GET__ `/quote/dialyList`
 - This endpoint will return all the quotes currently stored in the database.
-`/quote/iex/ticker/{ticker}`
+
+__GET__ `/quote/iex/ticker/{ticker}`
 - This endpoint will get the most recent market data from the IEX cloud with the specified ticker. It will return the market data directly.
-`/quote/tickerID/{tickerId}`
+
+__POST__ `/quote/tickerID/{tickerId}`
 - This endpoint will pull the most recent market data from the IEX cloud with the given ticker and save it to the database. It will return the saved quote.
-`/quote/iexMarketData`
+
+__PUT__ `/quote/iexMarketData`
 - This endpoint will pull the most recent market data from the IEX cloud for every quote that exists in the database. It will only update the quotes that are currently in the database instead of creating new ones.
 ## Trader Account Controller
 ![Diagram](./assets/TraderAccountController.png)
-1. This endpoint will delete a trader and the account associated with that trader. If the fund balance is not 0 or this trader is still holding securities, it will return bad HTTP status code. If the deletion succeeds, it will return good HTTP status code.
-2. This endpoint will use the trader information in the HTTP request and create a trader and an associated account. All fields except the ID field should not be null. It will return the trader's profile and account.
-3. This endpoint will do the same thing as the above endpoint. However, the information of the trader is included in the endpoint URL instead of the HTTP request header.
-4. This endpoint will deposit the specified amount of funds into a given trader's account and it will return the new account information.
-5. This endpoint will withdraw the specified amount of fun from the given trader's account. It will return bad HTTP status code if there is an insufficient fund available. If it succeeds, it will return the new account information.
+__DELETE__ `/trader/traderId/{traderId}`
+- This endpoint will delete a trader and the account associated with that trader. If the fund balance is not 0 or this trader is still holding securities, it will return bad HTTP status code. If the deletion succeeds, it will return good HTTP status code.
+
+__POST__ `/trader`
+- This endpoint will use the trader information in the HTTP request and create a trader and an associated account. All fields except the ID field should not be null. It will return the trader's profile and account.
+
+__POST__`/trader/firstname/{firstname}/lastname/{lastname}/dob/{dob}/country/{country}/email/{email}`
+- This endpoint will do the same thing as the above endpoint. However, the information of the trader is included in the endpoint URL instead of the HTTP request header.
+
+__PUT__`/trader/deposit/traderId/{traderId}/amount/{amount}`
+- This endpoint will deposit the specified amount of funds into a given trader's account and it will return the new account information.
+
+__PUT__`/trader/withdraw/traderId/{traderId}/amount/{amount}`
+- This endpoint will withdraw the specified amount of fun from the given trader's account. It will return bad HTTP status code if there is an insufficient fund available. If it succeeds, it will return the new account information.
 ## Order controller
 ![Diagram](./assets/OrderController.png)
-1. This endpoint will submit a market order. Based on the value given for the position of security, it will determine whether to buy or sell the security. In case of buying the security, a bad HTTP status code will be return if the ask size of this security is smaller than the position required or there is an insufficient fund to buy the security. In case of selling the security, a bad HTTP status code will be return if the owned position of this security is smaller than the given position. Otherwise, if the execution of the market order succeeds, it will return the executed security order.
+__POST__ `/order/marketOrder`
+- This endpoint will submit a market order. Based on the value given for the position of security, it will determine whether to buy or sell the security. In case of buying the security, a bad HTTP status code will be return if the ask size of this security is smaller than the position required or there is an insufficient fund to buy the security. In case of selling the security, a bad HTTP status code will be return if the owned position of this security is smaller than the given position. Otherwise, if the execution of the market order succeeds, it will return the executed security order.
 
 ## Dashboard controller
 ![Diagram](./assets/DashBoardController.png)
-`/dashboard/portfolio/traderId/{traderId}`
+__GET__ `/dashboard/portfolio/traderId/{traderId}`
 - This endpoint will return all the securities owned by the given trader. For each security owned, it will show its ticker, position, and current quote. It will return bad HTTP status code if the given trader ID cannot be found.
-`/dashboard/profile/traderId/{traderId}`
+
+__GET__ `/dashboard/profile/traderId/{traderId}`
 -  This endpoint will return the trader information along with the associated account information for the given trader ID. It will return bad HTTP status code if the given trader ID cannot be found.
 
 # Docker Deployment
