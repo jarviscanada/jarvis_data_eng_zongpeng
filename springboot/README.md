@@ -99,7 +99,7 @@ Postman can also be used to interact with this application through HTTP requests
 ## Swagger
 In the following description of the endpoints, the screenshot of Swagger UI is used. The same result can also be achieved using Postman or `curl` command in Linux. However, Swagger UI is used as an example in this case because it looks good. Each endpoint will be described in detail in the following sections with the order presented in screentshot of each controller.
 
-## Quote Controller
+### Quote Controller
 ![Diagram](./assets/QuoteController.png)
 __GET__ `/quote/dialyList`
 - This endpoint will return all the quotes currently stored in the database.
@@ -112,7 +112,7 @@ __POST__ `/quote/tickerID/{tickerId}`
 
 __PUT__ `/quote/iexMarketData`
 - This endpoint will pull the most recent market data from the IEX cloud for every quote that exists in the database. It will only update the quotes that are currently in the database instead of creating new ones.
-## Trader Account Controller
+### Trader Account Controller
 ![Diagram](./assets/TraderAccountController.png)
 __DELETE__ `/trader/traderId/{traderId}`
 - This endpoint will delete a trader and the account associated with that trader. If the fund balance is not 0 or this trader is still holding securities, it will return bad HTTP status code. If the deletion succeeds, it will return good HTTP status code.
@@ -128,12 +128,12 @@ __PUT__`/trader/deposit/traderId/{traderId}/amount/{amount}`
 
 __PUT__`/trader/withdraw/traderId/{traderId}/amount/{amount}`
 - This endpoint will withdraw the specified amount of fun from the given trader's account. It will return bad HTTP status code if there is an insufficient fund available. If it succeeds, it will return the new account information.
-## Order controller
+### Order controller
 ![Diagram](./assets/OrderController.png)
 __POST__ `/order/marketOrder`
 - This endpoint will submit a market order. Based on the value given for the position of security, it will determine whether to buy or sell the security. In case of buying the security, a bad HTTP status code will be return if the ask size of this security is smaller than the position required or there is an insufficient fund to buy the security. In case of selling the security, a bad HTTP status code will be return if the owned position of this security is smaller than the given position. Otherwise, if the execution of the market order succeeds, it will return the executed security order.
 
-## Dashboard controller
+### Dashboard controller
 ![Diagram](./assets/DashBoardController.png)
 __GET__ `/dashboard/portfolio/traderId/{traderId}`
 - This endpoint will return all the securities owned by the given trader. For each security owned, it will show its ticker, position, and current quote. It will return bad HTTP status code if the given trader ID cannot be found.
