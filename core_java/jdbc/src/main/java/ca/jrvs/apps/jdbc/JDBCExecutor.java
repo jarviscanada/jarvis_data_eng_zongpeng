@@ -14,6 +14,7 @@ public class JDBCExecutor {
     try{
       Connection connection = dcm.getConnection();
       CustomerDAO customerDAO = new CustomerDAO(connection);
+	    
       /*Creating data example...*/
       Customer customer = new Customer();
       customer.setFirstName("Edward");
@@ -24,14 +25,12 @@ public class JDBCExecutor {
       customer.setCity("Toronto");
 			customer.setState("ON");;
       customer.setZipCode("M1G1Q1");
-
       customerDAO.create(customer);
 
       /*Reading data example...*/
       customer = customerDAO.findById(10003);
       System.out.println(customer.getFirstName() + " " + customer.getLastName());
       
-
       /*Update data example...*/
       customer = customerDAO.findById(10002);
       System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " +
@@ -40,7 +39,6 @@ public class JDBCExecutor {
       System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " +
            customer.getEmail());
       
-
       /*Delete data example and trying new toString()...*/
       customer = new Customer();
       customer.setFirstName("Zongpeng");
@@ -80,7 +78,7 @@ public class JDBCExecutor {
       }
 
     }catch(SQLException e){
-      e.printStackTrace();
+      throw new RuntimeException("Unable to execute the SQL query.", e);
     }
   }
 

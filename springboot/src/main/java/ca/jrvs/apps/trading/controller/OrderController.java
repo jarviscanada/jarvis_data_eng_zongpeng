@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-//@Api(value = "Order", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(value = "Order", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -23,11 +23,11 @@ public class OrderController {
   public OrderController(OrderService orderService){
     this.orderService = orderService;
   }
-/*
+
   @ApiOperation(value = "Submit a market order", notes = "Submit a market order.")
   @ApiResponses(value = {
       @ApiResponse(code = 404, message = "accountId or ticker is not found"),
-      @ApiResponse(code = 400, message = "Unable to deposit due to user input.")})*/
+      @ApiResponse(code = 400, message = "Unable to deposit due to user input.")})
   @PostMapping(path = "/marketOrder")
   @ResponseStatus(HttpStatus.CREATED)
   @ResponseBody

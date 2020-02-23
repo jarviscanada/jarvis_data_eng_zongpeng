@@ -14,18 +14,7 @@ public class Coordinates {
 
   @JsonProperty("type")
   private String type;
-//
-//  public Coordinates() {
-//    this.coordinatesTweet.add(0.0);
-//    this.coordinatesTweet.add(0.0);
-//    this.type = "";
-//  }
-//
-//  public Coordinates(Double lon, Double lat, String type) {
-//    this.coordinatesTweet.add(lon);
-//    this.coordinatesTweet.add(lat);
-//    this.type = type;
-//  }
+  
   public List<Double> getCoordinatesTweet() {
     return coordinatesTweet;
   }

@@ -27,7 +27,7 @@ public class JavaGrepImp implements JavaGrep {
     try {
       javaGrepImp.process();
     } catch (Exception ex) {
-      ex.printStackTrace();
+      throw new RuntimeException("Failed to execute the program.");
     }
   }
 
@@ -78,7 +78,7 @@ public class JavaGrepImp implements JavaGrep {
       }
       scanner.close();
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new RuntimeException("Unable to find the file.", e);
     }
     return listString;
   }
@@ -93,7 +93,7 @@ public class JavaGrepImp implements JavaGrep {
     Path file = (new File(outFile)).toPath();
     try {
       Files.createFile(file);
-    } catch (IOException ignored) {
+    } catch (IOException ignoredIfExist) {
       ;
     }
 
