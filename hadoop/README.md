@@ -1,5 +1,4 @@
-
-Table of contents
+__Table of contents__
 * [Introduction](#introduction)
 * [Hadoop Cluster](#hadoop-cluster)
 	- [Hadoop Framework](#hadoop-framework)
