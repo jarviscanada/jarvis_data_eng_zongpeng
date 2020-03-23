@@ -1,3 +1,8 @@
+* [Introduction](#introduction)
+* [Spark Architecture](#spark-architecture)
+* [Spark RDD Project](#spark-rdd-project)
+* [Spark DF Project](#spark-df-project)
+
 # Introduction
 The purpose of this project is to leverage Apache Spark to process Big Data. Apache Spark is a unified analytics engine for general-purpose distributed data processing. In this project, two difference ways to use Spark: RDD and  Structured APIs are studied. I also have a comprehensive understanding of Spark's architecture. In the following section, Spark's architecture as well as how to leverage RDD and Structured API will be presented.
 
