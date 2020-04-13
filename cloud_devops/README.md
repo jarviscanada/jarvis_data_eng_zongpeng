@@ -52,7 +52,8 @@ As shown above, NGINX is in charge of routing the request to the servers by the 
 
 ## Jenkins CI/CD pipeline
 The CI/CD pipeline in Jenkins is built using JenkinsFile. It can be found under the root directory of the Springboot project. JenkinsFile is responsible for deploying code in develop branch into DEV env and deploying code in the master branch into PROD env. It will call the eb_deploy shell script located in the script/eb folder to initialize and deploy the application. More env deployment can be added by inserting more stages in the JenkinsFile for other test purposes.
-The overall pipeline is illustrated in the below diagram.
+The overall pipeline is illustrated in the diagram below.
+
 ![Diagram](./assets/pipeline.png)
 
 # Potential Improvements
