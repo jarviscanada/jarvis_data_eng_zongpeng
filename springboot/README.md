@@ -8,7 +8,7 @@
 * [Improvements](#improvements)
 
 # Introduction
-The purpose of this application is to design an online stock trading simulation REST API with microservice and MVC design architecture. This application can fetch market data from external data sources [IEX cloud](https://iexcloud.io/) and store it in the Postgres SQL database along with user(trader) information. The internal dependency management based on Spring Framework is achieved by Spring Boot and external dependency management is done by using Maven. The Docker is able to build image using maven and construct container from it. Then it can be tested or examined from a web browser using Swagger or from Postman. This application can be used by either front-end or mobile developer to build a trading app.
+The purpose of this application is to design an online stock trading simulation REST API with microservice and MVC design architecture. This application can fetch market data from external data sources [IEX cloud](https://iexcloud.io/) and store it in the Postgres SQL database along with user(trader) information. The internal dependency management based on Spring Framework is achieved by Spring Boot and external dependency management is done by using Maven. The Docker is able to build an image containing the application using maven and construct container from it. Then it can be tested or examined from a web browser using Swagger or from Postman. This application can be used by either front-end or mobile developer to build a trading app.
 
 # Quick Start
 ### Prequiresities
@@ -79,7 +79,7 @@ This tier is where data is stored, fetched, and manipulated. In this application
 In Application tier, the dependency management is done by Spring Boot. It manages the Tomcat Servlet, maps the HTTP request to the corresponding method in the controller and generates the HTTP response using the output of the method in the controller tier.
 
 __Controller Layer__
-This layer contains a controller for each service. An HTTP request received by the servelet will map the request to the method in the controller, and the controller is responsible for invoking the corresponding method in the service layer. There are four controllers in this application and all endpoints are described in detailed under [REST API Usage](#rest-api-usage) section.
+This layer contains a controller for each service. An HTTP request received by the servelet will map the request to the method in the controller, and the controller is responsible for invoking the corresponding method in the service layer. There are four controllers in this application and all endpoints are described in detail under [REST API Usage](#rest-api-usage) section.
 
 __Service Layer__
 This layer is the implementation of the business logic provided. Each implemented method will be invoked by its corresponding controller. Moreover, all methods in this layer are transactional which means it will only invoke the DAO layer only if there is no error.
@@ -146,6 +146,9 @@ __GET__ `/dashboard/profile/traderId/{traderId}`
 ![Diagram](./assets/Docker.png)
 
 As mentioned before, the database needs to be launched in a docker container to use this application. The above diagram illustrates what is going on by doing that. Initially, it will create a docker network for future use(it is shown at the bottom of the diagram). For the second step, it will build a PostgreSQL using the Dockerfile under `./springboot/psql/` directory. It will execute the `schema.ddl` to set up the database. It will also build an image using Dockerfile under `./springboot/` directory. It will package the java application using maven and build an image from it. The last step would be the creation of the container from the images and attached them to the `trading-net` created before.
+
+# Modification by another project
+In this project, the files under the script folder, the JenkinsFile, and the health endpoint is not part of this project. For more information, please see [Cloud & DevOps](../cloud_devops) project.
 
 # Improvements
 1. Enrich the content of the quote to contain more information.
