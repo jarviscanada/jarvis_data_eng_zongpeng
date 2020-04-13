@@ -148,7 +148,7 @@ __GET__ `/dashboard/profile/traderId/{traderId}`
 As mentioned before, the database needs to be launched in a docker container to use this application. The above diagram illustrates what is going on by doing that. Initially, it will create a docker network for future use(it is shown at the bottom of the diagram). For the second step, it will build a PostgreSQL using the Dockerfile under `./springboot/psql/` directory. It will execute the `schema.ddl` to set up the database. It will also build an image using Dockerfile under `./springboot/` directory. It will package the java application using maven and build an image from it. The last step would be the creation of the container from the images and attached them to the `trading-net` created before.
 
 # Modification by another project
-In this project, the files under the script folder, the JenkinsFile, and the health endpoint is not part of this project. For more information, please see [Cloud & DevOps](../cloud) project.
+In this project, the files under the script folder, the JenkinsFile, and the health endpoint is not part of this project. For more information, please see [Cloud & DevOps](../cloud_devops) project.
 
 # Improvements
 1. Enrich the content of the quote to contain more information.
