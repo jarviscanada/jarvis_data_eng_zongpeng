@@ -23,7 +23,7 @@ In this project, multiple amazon web services are leveraged and studied:
 - Security Group: Inbound and Outbound rule group
 - Application Load Balancer: Can start new EC2 instance when  incoming traffic becomes larger
 - Target Group: Group of EC2 instance managed by ALB
-- Auto Scaling group: Group where the EC2 instance created by ALB goes
+- Auto Scaling group: Group where the EC2 instance managed by auto scaling based on the incoming traffic
 - Cloudformation: Debug stack creation error.
 - Elastic Beanstalk: Deployment tool
 
@@ -32,14 +32,14 @@ Below is a diagram illustrating the cloud application architecture using ALB.
 ![Diagram](./assets/CloudArchitecture.png)
 
 ### Advantage of using ALB
-By using an application load balancer, a new EC2 instance will be instantiated by ALB from the AMI image provided when the incoming traffic becomes larger than a configured threshold. Then, the ALB can route the requests to all the EC2 instances available to improve performance. Also, the ALB will send health requests to each EC2 instance it manages. If there is no response or there are two unhealthy responses consecutively, the ALB will mark it as a failed instance, terminate it and start a new one. 
+By using an application load balancer, a new EC2 instance will be instantiated by auto scaling from the AMI image provided when the incoming traffic becomes larger than a configured threshold. Then, the ALB can route the requests to all the EC2 instances exist in the target group to improve performance. Also, the ALB will send health requests to each EC2 instance it manages. If there is no response or there are two unhealthy responses consecutively, the ALB will mark it as a failed instance and not route the request to this failed instance. 
 
 # Deployment Environments
-Next, elastic beanstalk (EB) is leveraged to simplify the deployment process. In this trading application, two environments are created using EB: development and production. Develop an environment is where testing happens and the production environment is the one that is published. To create an application, only the application is required. For a single application, it can have multiple environments (configurations). For both dev and prod env in this application, they are configured to have a load balancer that can launch three EC2 instances (spanning three regions in Central Canada) at most. Also, both endpoints are available at port 8080 which is the port that swagger UI is listening on. The detail of deployment using EB is shown in the following diagram.
+Next, elastic beanstalk (EB) is leveraged to simplify the deployment process. In this trading application, two environments are created using EB: development and production. Develop an environment is where testing happens and the production environment is the one that is published. To create an application, only the packaged source code is required. For a single application, it can have multiple environments (configurations). For both dev and prod env in this application, they are configured to have a auto scaling group that can manage three EC2 instances (spanning three regions in Central Canada) at most. Also, both endpoints are available at port 8080 which is the port that swagger UI is listening on. The detail of deployment using EB is shown in the following diagram.
 
 ![Diagram](./assets/EBDeployment.png)
 
-For EB, a newer version can be deployed by simply uploading the zip file containing the application. The environment will be updated after the newer version is deployed. However, there are still lots of manual work like maven packaging and uploading the application. The next session will introduce a more automated approach. 
+For EB, a newer version can be deployed by simply uploading the zip file containing the application. The environment will be down until the automated update process is finished. However, there are still lots of manual work like maven packaging and uploading the application. The next session will introduce a more automated approach. 
 
 # Jenkins 
 
