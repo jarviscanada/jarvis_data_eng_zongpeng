@@ -8,7 +8,7 @@
 * [Improvements](#improvements)
 
 # Introduction
-The purpose of this application is to design an online stock trading simulation REST API with microservice and MVC design architecture. This application can fetch market data from external data sources [IEX cloud](https://iexcloud.io/) and store it in the Postgres SQL database along with user(trader) information. The internal dependency management based on Spring Framework is achieved by Spring Boot and external dependency management is done by using Maven. The Docker can build an image using maven and construct container from it. Then it can be tested or examined from a web browser using Swagger or from Postman. This application can be used by either front-end or mobile developer to build a trading app.
+The purpose of this application is to design an online stock trading simulation REST API with microservice and MVC design architecture. This application can fetch market data from external data sources [IEX cloud](https://iexcloud.io/) and store it in the Postgres SQL database along with user(trader) information. The internal dependency management based on Spring Framework is achieved by Spring Boot and external dependency management is done by using Maven. The Docker is able to build an image containing the application using maven and construct container from it. Then it can be tested or examined from a web browser using Swagger or from Postman. This application can be used by either front-end or mobile developer to build a trading app.
 
 # Quick Start
 ### Prequiresities
